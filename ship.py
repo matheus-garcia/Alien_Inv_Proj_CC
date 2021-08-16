@@ -19,13 +19,13 @@ class Ship():
         
         # Store a float to the center of the ship
         self.center = float(self.rect.centerx)
-        #self.bottom = float(self.rect.bottom)
+        self.bottom = float(self.rect.bottom)
         
         # Movement flags
         self.moving_right = False
         self.moving_left = False
-        #self.moving_up = False
-        #self.moving_down = False
+        self.moving_up = False
+        self.moving_down = False
         
     def update(self):
         """
@@ -37,15 +37,15 @@ class Ship():
         elif self.moving_left and self.rect.left > 0:
             self.center -= self.ai_settings.ship_speed_factor
         
-        #elif self.moving_up and self.rect.top > self.screen_rect.top:
-            #self.bottom -= self.ai_settings.ship_speed_factor
+        elif self.moving_up and self.rect.top > self.screen_rect.top:
+            self.bottom -= self.ai_settings.ship_speed_factor
             
-        #elif self.moving_down and self.rect.bottom < self.screen_rect.bottom:
-            #self.bottom += self.ai_settings.ship_speed_factor
+        elif self.moving_down and self.rect.bottom < self.screen_rect.bottom:
+            self.bottom += self.ai_settings.ship_speed_factor
             
         # Update object rect
         self.rect.centerx = self.center
-        #self.rect.bottom = self.bottom
+        self.rect.bottom = self.bottom
         
     def blitme(self):
         """Draw a spaceship on its current position"""
