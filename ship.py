@@ -14,8 +14,8 @@ class Ship():
         self.screen_rect = screen.get_rect()
         
         # Initialize each new ship in the middle bottom of the screen
-        self.rect.centery = self.screen_rect.centery
-        #self.rect.bottom = self.screen_rect.bottom
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom
         
         # Store a float to the center of the ship
         self.center = float(self.rect.centerx)
