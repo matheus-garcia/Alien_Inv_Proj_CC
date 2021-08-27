@@ -2,6 +2,7 @@ import pygame
 from pygame.sprite import Group
 from settings import Settings
 from ship import Ship
+from virus import Virus
 import game_functions as gf
 
 def  run_game():
@@ -15,24 +16,21 @@ def  run_game():
     # Creates a ship
     ship = Ship(ai_settings, screen)
     
-    # Create a group which will be used to store the bullets
+    # Creates a group which will be used to store the bullets
     bullets = Group()
+    
+    # Creates an enemy
+    virus = Virus(ai_settings, screen)
     
     
     # Initiates the main loop of the game
     while True:
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
-        bullets.update()
-        gf.update_screen(ai_settings, screen, ship, bullets)
-        
-        # Get rid of disappeared bullets
-        for bullet in bullets.copy():
-            if bullet.rect.bottom <= 0:
-                bullets.remove(bullet)
-        print(len(bullets))
-                 
+        gf.update_bullets(bullets)
+        gf.update_screen(ai_settings, screen, ship, virus, bullets)
+                         
         # Turn the most recently screen visible
         pygame.display.flip()
         
-run_game() 
+run_game()
