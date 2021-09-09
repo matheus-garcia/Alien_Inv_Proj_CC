@@ -19,7 +19,7 @@ class Virus(Sprite):
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
         
-        # Stores enemy's exactly position
+        # Stores virus' exactly position
         self.x = float(self.rect.x)
         
     def blitme(self):
