@@ -72,19 +72,43 @@ def fire_bullet(ai_settings, screen, ship, bullets):
             new_bullet = Bullet(ai_settings, screen, ship)
             bullets.add(new_bullet)
         
-        
-def create_fleet(ai_settings, screen, viruses):
-    """Creates a complete fleet of virus"""
-    # Creates and calculates the number of virus in a line
-    virus = Virus(ai_settings, screen)
-    virus_width = virus.rect.width
+def get_number_viruses_x(ai_settings, virus_width):
+    """Determines the number of viruses that fits in each line"""
     available_space_x = ai_settings.screen_width - 2 * virus_width
     number_viruses_x = int(available_space_x / (2 * virus_width))
+    return number_viruses_x
+
+def get_number_rows(ai_settings, ship_height, virus_height):
+    """Determines the number of rows with viruses that fits in teh screen"""
+    available_space_y = (
+        ai_settings.screen_height - (3 * virus_height) - ship_height
+        )
+    number_rows = int(available_space_y / (2 * virus_height))
+    return number_rows
+
+def create_virus(ai_settings, screen, viruses, virus_number, row_number):
+    # Creates an virus and positions it on the line of the
+    virus = Virus(ai_settings, screen)
+    virus_width = virus.rect.width
+    virus.x = virus_width + 2 * virus_width * virus_number
+    virus.rect.y = virus.rect.height + 2 * virus.rect.height * row_number
+    virus.rect.x = virus.x
+    viruses.add(virus)
+            
+def create_fleet(ai_settings, screen, ship, viruses):
+    """Creates a complete fleet of viruses"""
+    # Creates and calculates the number of virus in a line
+    virus = Virus(ai_settings, screen)
+    number_viruses_x = get_number_viruses_x(ai_settings, virus.rect.width)
+    number_rows = get_number_rows(ai_settings,
+                                  ship.rect.height,
+                                  virus.rect.height)
     
-    # Creates the first virus line
-    for virus_number in range(number_viruses_x):
-        # Creates the virus in the line
-        virus = Virus(ai_settings, screen)
-        virus.x = virus_width + 2 * virus_width * virus_number
-        virus.rect.x = virus.x
-        viruses.add(virus)
+    # Creates the virus fleet
+    for row_number in range(number_rows):
+        for virus_number in range(number_viruses_x):
+            create_virus(ai_settings, screen, viruses, virus_number, row_number)
+            
+def update_viruses(viruses):
+    """Updates all viruses positions"""
+    viruses.update()

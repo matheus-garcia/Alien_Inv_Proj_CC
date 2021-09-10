@@ -17,3 +17,6 @@ class Settings():
         self.bullet_height = 15
         self.bullet_color = (94, 104, 27)
         self.bullets_allowed = 3
+        
+        # Virus settings
+        self.virus_speed_factor = 1

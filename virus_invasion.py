@@ -22,7 +22,7 @@ def  run_game():
     viruses = Group()
     
     # Creates a virus fleet
-    gf.create_fleet(ai_settings, screen, viruses)
+    gf.create_fleet(ai_settings, screen, ship, viruses)
     
     
     # Initiates the main loop of the game
@@ -30,6 +30,7 @@ def  run_game():
         gf.check_events(ai_settings, screen, ship, bullets)
         ship.update()
         gf.update_bullets(bullets)
+        gf.update_viruses(viruses)
         gf.update_screen(ai_settings, screen, ship, viruses, bullets)
         
 run_game()

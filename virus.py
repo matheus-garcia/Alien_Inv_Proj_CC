@@ -25,3 +25,8 @@ class Virus(Sprite):
     def blitme(self):
         """Draws the enemy on its current position."""
         self.screen.blit(self.image, self.rect)
+        
+    def update(self):
+        """Moves the virus to the right"""
+        self.x += self.ai_settings.virus_speed_factor
+        self.rect.x = self.x
